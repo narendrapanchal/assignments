@@ -1,0 +1,54 @@
+/* App.css */
+.app {
+  text-align: center;
+  padding: 20px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.gallery-item {
+  margin: 10px;
+}
+
+.gallery-image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.gallery-image:hover {
+  transform: scale(1.2);
+}
+@media (max-width: 600px) {
+  .gallery {
+    flex-direction: column;
+  }
+}
+.delete-button{
+  position: absolute;
+  background-color: red;
+  color: white;
+  z-index: 1;
+  padding: 2px 6px;
+  border-radius: 30px;
+  font-size: 20px;
+  line-height: 20px;
+  margin: 10px 10px 0px 0px;
+
+}
+.cancel{
+  display: flex;
+  flex-direction: row-reverse;
+}
