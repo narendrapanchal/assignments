@@ -20,8 +20,8 @@ const CameraCapture = ({ onCapture }) => {
     getMedia();
   }, [cameraFacing]);
 
-  const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 0.1, 2)); // Limit zoom to 2x
-  const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 0.1, 1)); // Limit zoom to 1x
+  const handleZoomIn = () => setZoomLevel(prev => Math.min(prev + 0.1, 2)); 
+  const handleZoomOut = () => setZoomLevel(prev => Math.max(prev - 0.1, 1)); 
 
   const handleCapture = () => {
     const canvas = document.createElement('canvas');
@@ -35,9 +35,9 @@ const CameraCapture = ({ onCapture }) => {
   const handleAspectRatioChange = (ratio) => setAspectRatio(ratio);
 
   return (
-    <div>
+    <div className='camera-capture'>
       <video ref={videoRef} autoPlay style={{ transform: `scale(${zoomLevel})`, aspectRatio: aspectRatio }} />
-      <div>
+      <div className='buttons'>
         <button onClick={() => setCameraFacing(cameraFacing === 'user' ? 'environment' : 'user')}>Toggle Camera</button>
         <button onClick={handleZoomIn}>Zoom In</button>
         <button onClick={handleZoomOut}>Zoom Out</button>

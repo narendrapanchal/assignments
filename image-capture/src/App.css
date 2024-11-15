@@ -18,6 +18,7 @@
 
 .gallery-item {
   margin: 10px;
+  z-index: 1;
 }
 
 .gallery-image {
@@ -26,6 +27,7 @@
   object-fit: cover;
   border-radius: 10px;
   transition: transform 0.3s;
+  z-index: 1;
 }
 
 .gallery-image:hover {
@@ -51,4 +53,15 @@
 .cancel{
   display: flex;
   flex-direction: row-reverse;
+}
+.camera-capture{
+  display: flex;
+  justify-content: center;
+  align-items: center ;
+  flex-direction: column;
+  margin: auto;
+  max-width:70vw;
+}
+.buttons{
+  z-index: 1;
 }
