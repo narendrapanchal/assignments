@@ -13,6 +13,7 @@ return (
                 height="200"
                 objectFit="contain"
                 zIndex="0"
+                className="gallery-image"
               /></>
 )
 }
