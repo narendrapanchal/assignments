@@ -11,8 +11,8 @@ const CameraCapture = ({ onCapture }) => {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           facingMode: cameraFacing,
-          width: { ideal: 1280 },
-          height: { ideal: 720 },
+          width: { ideal: 100*Number(aspectRatio.split(":")[0]) },
+          height: { ideal: 100*Number(aspectRatio.split(":")[1]) },
         },
       });
       videoRef.current.srcObject = stream;
@@ -36,7 +36,7 @@ const CameraCapture = ({ onCapture }) => {
 
   return (
     <div className='camera-capture'>
-      <video ref={videoRef} autoPlay style={{ transform: `scale(${zoomLevel})`, aspectRatio: aspectRatio }} />
+      <video ref={videoRef} autoPlay style={{ transform: `scale(${zoomLevel})`, width: `${100*Number(aspectRatio.split(":")[0])}px`, height:`${100*Number(aspectRatio.split(":")[1])}px` }} />
       <div className='buttons'>
         <button onClick={() => setCameraFacing(cameraFacing === 'user' ? 'environment' : 'user')}>Toggle Camera</button>
         <button onClick={handleZoomIn}>Zoom In</button>

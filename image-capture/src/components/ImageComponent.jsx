@@ -16,7 +16,7 @@ let isDragging=false;
 let prevPosition={x:0,y:0};
 const handleMouseDown=(e)=>{
     isDragging=true;
-    prevPosition:{x:e.clientX,y:clientY};
+    prevPosition={x:e.clientX,y:e.clientY};
 }
     },[])
   return (

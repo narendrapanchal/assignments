@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ZoomImage from './ZoomImage';
 
 const ImageGallery = ({ images, onDelete }) => {
   return (
@@ -11,12 +12,7 @@ const ImageGallery = ({ images, onDelete }) => {
           onClick={() => onDelete(index)}
           >&times;</button>
           </div>
-          <img
-            src={image}
-            alt="Captured"
-            className="gallery-image"
-            style={{ transition: 'transform 0.3s' }}
-          />
+          <ZoomImage baseURL={image}/>
         </div>
       ))}
     </div>
