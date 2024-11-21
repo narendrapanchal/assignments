@@ -1,0 +1,29 @@
+
+@keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .loader {
+    animation: spin 1s linear infinite;
+  }
+  button > svg{
+    width: 25px;
+    height: 25px;
+  }
+  .icons>  button:nth-child(1) >svg{
+    color: red;
+  }
+  .rotate-270{
+    rotate: 270deg;
+  }
+  .user-data > p{
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+  }
+  svg{
+    height: 25px;
+    width: 25px;
+  }
