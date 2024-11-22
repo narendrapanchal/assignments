@@ -1,25 +1,32 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../features/usersSlice";
 
 const EditUser = ({ closePopup, userData }) => {
+  const dispatch=useDispatch();
   const [formData, setFormData] = useState({ ...userData });
   const [errors, setErrors] = useState({});
 
-  // Handle Input Change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Validate Form
   const validate = () => {
     const newErrors = {};
-    if (!formData.email.match(/^\S+@\S+\.\S+$/))
+    if (!formData.email.match(/^\S+@\S+\.\S+$/) || formData.email.length < 3) {
       newErrors.email = "Invalid email";
-    if (!formData.name) newErrors.name = "Name is required";
-    if (!formData.phone.match(/^\d{10}$/))
-      newErrors.phone = "Phone must be 10 digits";
-    if (!formData.website.match(/^(https?:\/\/)?(www\.)?\S+\.\S+$/))
-      newErrors.website = "Invalid website URL";
+    }
+
+    if (formData.name.length < 3) {
+      newErrors.name = "Name must be minimum of 3 characters";
+    }
+    if (formData.phone.length < 6) {
+      newErrors.phone = "Phone must be minimum 6 digits";
+    }
+    if (formData.website.length < 5) {
+      newErrors.website = "URL required of minimum 5 characters";
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -27,7 +34,7 @@ const EditUser = ({ closePopup, userData }) => {
   // Handle Form Submit
   const handleSubmit = () => {
     if (validate()) {
-      alert("Form submitted successfully!");
+      dispatch(updateUser({user:{...formData,editIndex:undefined},index:formData.editIndex}));
       closePopup();
     }
   };
@@ -49,84 +56,99 @@ const EditUser = ({ closePopup, userData }) => {
         </button>
         <h2 className="text-lg font-bold mb-4  move-up ">Basic Model</h2>
       </div>
-      <form onSubmit={handleSubmit}>
         <div
           className="bg-white  shadow-lg w-96 relative p-6"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Form */}
-          <div className="space-y-4">
-            {/* Name */}
+          <div className="space-y-6">
+
             <div className="flex justify-end items-center gap-1 ">
               <label className="block text-sm font-medium text-gray-700 ">
                 <span className="text-red-500">*</span> Name
               </label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
-                placeholder="Enter your name"
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm">{errors.name}</p>
-              )}
-            </div>
-            {/* Email */}
-            <div className="flex justify-end items-center gap-1 ">
-              <label className="block text-sm font-medium text-gray-700 ">
-                <span className="text-red-500">*</span> Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
-                placeholder="Enter your email"
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email}</p>
-              )}
+              <div>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
+                  placeholder="Enter your name"
+                />
+                {errors.name && (
+                  <p className="text-red-500 text-sm text-right absolute">
+                    {errors.name}
+                  </p>
+                )}
+              </div>
             </div>
 
-            {/* Phone */}
-            <div className="flex justify-end items-center gap-1 ">
-              <label className="block text-sm font-medium text-gray-700 ">
-                <span className="text-red-500">*</span> Phone
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
-                placeholder="Enter your phone number"
-              />
-              {errors.phone && (
-                <p className="text-red-500 text-sm">{errors.phone}</p>
+             <div className="flex justify-end items-center gap-1 ">
+                <label className="block text-sm font-medium text-gray-700 ">
+                  <span className="text-red-500">*</span> Email
+                </label>
+            <div>
+
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
+                  placeholder="Enter your email"
+                  />
+                   {errors.email && (
+                <p className="text-red-500 text-sm  absolute">
+                  {errors.email}
+                </p>
               )}
-            </div>
-            {/* Website */}
-            <div className="flex justify-end items-center gap-1 ">
-              <label className="block text-sm font-medium text-gray-700 ">
-                <span className="text-red-500">*</span>  Website
-              </label>
-              <input
-                type="url"
-                required={true}
-                minLength={5}
-                name="website"
-                value={formData.website}
-                onChange={handleChange}
-                className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
-                placeholder="Enter your website URL"
-              />
-              {errors.website && (
-                <p className="text-red-500 text-sm">{errors.website}</p>
+                  </div>
+              </div>
+             
+              <div className="flex justify-end items-center gap-1 ">
+                <label className="block text-sm font-medium text-gray-700 ">
+                  <span className="text-red-500">*</span> Phone
+                </label>
+                <div>
+
+                <input
+                  type="text"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
+                  placeholder="Enter your phone number"
+                  />
+                     {errors.name && (
+                <p className="text-red-500 text-sm text-right absolute">
+                  {errors.phone}
+                </p>
               )}
-            </div>
+                  </div>
+              </div>
+
+              <div className="flex justify-end items-center gap-1 ">
+                <label className="block text-sm font-medium text-gray-700 ">
+                  <span className="text-red-500">*</span> Website
+                </label>
+                <div>
+
+                <input
+                  type="string"
+                  name="website"
+                  value={formData.website}
+                  onChange={handleChange}
+                  className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
+                  placeholder="Enter your website URL"
+                  />
+                  {errors.website && (
+                <p className="text-red-500 text-sm text-right absolute">
+                  {errors.website}
+                </p>
+              )}
+                  </div>
+              </div>
+              
           </div>
         </div>
         <div
@@ -141,14 +163,13 @@ const EditUser = ({ closePopup, userData }) => {
               Cancel
             </button>
             <button
-              type="submit"
+              onClick={handleSubmit}
               className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
             >
               OK
             </button>
           </div>
         </div>
-      </form>
     </div>
   );
 };

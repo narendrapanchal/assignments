@@ -39,7 +39,7 @@ function UserList() {
         ))}
       </div>
     </div>
-    {isOpen&&<EditUser userData={data[editIndex]} closePopup={handlePopup}/>}
+    {isOpen&&<EditUser userData={{...data[editIndex],editIndex}} closePopup={handlePopup}/>}
     </>
   );
 };
