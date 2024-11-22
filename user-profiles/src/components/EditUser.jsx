@@ -38,7 +38,7 @@ const EditUser = ({ closePopup, userData }) => {
       onClick={closePopup}
     >
       <div
-        className="bg-white  shadow-lg w-96 relative p-6 pb-0 border border-b-2"
+        className="rounded-t-md bg-white  shadow-lg w-96 relative p-6 pb-0 border border-b-2"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -115,6 +115,8 @@ const EditUser = ({ closePopup, userData }) => {
               </label>
               <input
                 type="url"
+                required={true}
+                minLength={5}
                 name="website"
                 value={formData.website}
                 onChange={handleChange}
@@ -131,10 +133,10 @@ const EditUser = ({ closePopup, userData }) => {
           className="bg-white rounded-b-md border-t  border-b-2 w-96 relative p-6 pt-0"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className=" flex justify-end space-x-4  pt-3">
+          <div className="flex justify-end space-x-4  pt-3">
             <button
               onClick={closePopup}
-              className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-400"
+              className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-400 hover:text-white"
             >
               Cancel
             </button>
