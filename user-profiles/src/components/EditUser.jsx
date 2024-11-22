@@ -119,7 +119,7 @@ const EditUser = ({ closePopup, userData }) => {
                   className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
                   placeholder="Enter your phone number"
                   />
-                     {errors.name && (
+                     {errors.phone && (
                 <p className="text-red-500 text-sm text-right absolute">
                   {errors.phone}
                 </p>
