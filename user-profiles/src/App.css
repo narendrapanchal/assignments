@@ -9,8 +9,8 @@
     animation: spin 1s linear infinite;
   }
   button > svg{
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
   }
   .icons>  button:nth-child(1) >svg{
     color: red;
@@ -26,4 +26,7 @@
   svg{
     height: 25px;
     width: 25px;
+  }
+  .move-up{
+    margin-top: -12px;
   }

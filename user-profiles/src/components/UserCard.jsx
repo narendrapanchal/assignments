@@ -4,7 +4,7 @@ import { IoCallOutline,IoHeartSharp,IoHeartOutline } from "react-icons/io5";
 import { MdOutlineMailOutline,MdDelete } from "react-icons/md";
 import { deleteUser } from '../features/usersSlice';
 import { useDispatch } from 'react-redux';
-const UserCard = ({ user }) => {
+const UserCard = ({ user,handleEdit }) => {
   const [liked,setLiked]=useState(false);
   const dispatch=useDispatch();
   const handleLike=()=>{
@@ -28,10 +28,10 @@ const UserCard = ({ user }) => {
       </div>
       <div className='flex justify-between p-4 pl-8 pr-8 bg-gray-100 icons'>
         <button onClick={handleLike}>{liked?<IoHeartSharp className='liked' />:<IoHeartOutline/>}</button>
-        <button><CiEdit/></button>
+        <button onClick={handleEdit}><CiEdit className='hover:text-blue-500'/></button>
         <button onClick={()=>{
           dispatch(deleteUser(user.id))
-        }}><MdDelete/></button>
+        }}><MdDelete className='hover:text-blue-500'/></button>
       </div>
     </div>
   );
