@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../features/usersSlice";
 
@@ -11,7 +11,9 @@ const EditUser = ({ closePopup, userData }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+useEffect(()=>{
+  validate()
+},[formData])
   const validate = () => {
     const newErrors = {};
     if (!formData.email.match(/^\S+@\S+\.\S+$/) || formData.email.length < 3) {
@@ -72,8 +74,11 @@ const EditUser = ({ closePopup, userData }) => {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
-                  placeholder="Enter your name"
+                  className={`w-64 rounded-md px-3 py-2 mt-1 ${
+                    errors.name
+                      ? "outline outline-2 outline-red-600 border-gray-300"
+                      : "border border-gray-300 outline-none"
+                  }`}  placeholder="Enter your name"
                 />
                 {errors.name && (
                   <p className="text-red-500 text-sm text-right absolute">
@@ -94,8 +99,11 @@ const EditUser = ({ closePopup, userData }) => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
-                  placeholder="Enter your email"
+                  className={`w-64 rounded-md px-3 py-2 mt-1 ${
+                    errors.email
+                      ? "outline outline-2 outline-red-600 border-gray-300"
+                      : "border border-gray-300 outline-none"
+                  }`}  placeholder="Enter your email"
                   />
                    {errors.email && (
                 <p className="text-red-500 text-sm  absolute">
@@ -116,7 +124,11 @@ const EditUser = ({ closePopup, userData }) => {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
+                  className={`w-64 rounded-md px-3 py-2 mt-1 ${
+                    errors.phone
+                      ? "outline outline-2 outline-red-600 border-gray-300"
+                      : "border border-gray-300 outline-none"
+                  }`} 
                   placeholder="Enter your phone number"
                   />
                      {errors.phone && (
@@ -138,7 +150,11 @@ const EditUser = ({ closePopup, userData }) => {
                   name="website"
                   value={formData.website}
                   onChange={handleChange}
-                  className="w-64 border border-gray-300 rounded-md px-3 py-2 mt-1 focus:ring focus:ring-blue-500"
+                  className={`w-64 rounded-md px-3 py-2 mt-1 ${
+                    errors.website
+                      ? "outline outline-2 outline-red-600 border-gray-300"
+                      : "border border-gray-300 outline-none"
+                  }`}
                   placeholder="Enter your website URL"
                   />
                   {errors.website && (
@@ -164,7 +180,11 @@ const EditUser = ({ closePopup, userData }) => {
             </button>
             <button
               onClick={handleSubmit}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+              className={`px-4 py-2 rounded-md text-white ${
+                (errors.name || errors.website || errors.phone || errors.email)
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-500 hover:bg-blue-600"
+              }`}
             >
               OK
             </button>
