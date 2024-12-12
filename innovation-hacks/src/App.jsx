@@ -1,9 +1,9 @@
 import './App.css'
-import Allroutes from './components/Allroutes'
+import AllRoutes from './components/AllRoutes'
 
 function App() {
 
-  return (<Allroutes/>
+  return (<AllRoutes/>
   )
 }
 

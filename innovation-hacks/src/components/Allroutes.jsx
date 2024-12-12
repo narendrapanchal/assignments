@@ -1,8 +1,8 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from "../pages/home"
-import About from "../pages/About"
-function Allroutes() {
+import Home from "../pages/home.jsx"
+import About from "../pages/About.jsx"
+function AllRoutes() {
   return (
     <BrowserRouter>
     <Routes>
@@ -13,4 +13,4 @@ function Allroutes() {
   )
 }
 
-export default Allroutes
+export default AllRoutes
