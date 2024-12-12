@@ -17,8 +17,7 @@ const userSlice=createSlice({
             state.data=state.data.filter((user)=>user.id!==action.payload);
         },
         updateUser:(state,action)=>{
-            const list=state.data;
-            list[action.payload.index]=action.payload.user;
+            const list=state.data.map((user)=>user.id==action.payload.id?action.payload.user:user);
             state.data=list;
         }
     },

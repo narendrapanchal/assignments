@@ -30,3 +30,11 @@
   .move-up{
     margin-top: -12px;
   }
+  
+
+  @media (max-width:480px){
+    body{
+      background-color: black;
+      background: black;
+    }
+  }
